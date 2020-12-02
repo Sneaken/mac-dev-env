@@ -1,0 +1,14 @@
+name: 'Hello World' # name 定义工作流的名称
+description: 'Greet someone and record the time' # 对该工作流要完成的任务进行简单的描述.
+inputs: # 输入类
+  git_user_name:  # 变量 id of output
+    description: 'git 用户名'
+    required: true   # 必须存在
+    default: 'Bin Jiang' # 默认值
+  git_user_email:
+    description: 'git 邮箱'
+    required: true
+    default: '924393527@qq.com'
+runs: # 运行
+  using: 'bash'
+  main: 'init.bash'
