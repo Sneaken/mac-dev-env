@@ -37,6 +37,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: init
-        run: chmod a+x init.bash && ./init.bash
+#      - name: init
+#        run: chmod a+x init.bash && ./init.bash
+#        shell: bash
+      - name: test
+        run: chmod a+x test.bash && ./test.bash
         shell: bash

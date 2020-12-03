@@ -10,34 +10,6 @@ function init_work_dirs() {
   echo 'work directory done...'
 }
 
-function choose_default_shell() {
-  local choice
-  echo -n '
-please select the shell you use:
-1) bash
-2) zsh
-'
-  read -r choice
-  case $choice in
-  [bB]*)
-    SHELL_CONFIG_FILE='.bash_profile'
-    ;;
-  [zZ]*)
-    SHELL_CONFIG_FILE='.zshrc'
-    if ! command -v zsh; then
-      echo 'zsh could not bu found'
-      exit
-    fi
-    chsh -s "$(command -v zsh)"
-    ;;
-  *)
-    echo
-    echo "Don't enter other shell! try again..."
-    choose_default_shell
-    return
-    ;;
-  esac
-}
 
 function init_brew() {
   if ! command -v brew &>/dev/null; then
@@ -152,13 +124,12 @@ function main() {
     echo 'curl could not be found'
     exit
   fi
-
-  choose_default_shell
+  SHELL_CONFIG_FILE='.zshrc'
   init_brew
   init_utils_by_brew
 
   init_nvm
-  init_git
+#  init_git
 
   echo 'done...'
 
