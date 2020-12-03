@@ -44,6 +44,6 @@ jobs:
         env:
           git-user-name: ${{ 'Sneaker' }}
           git-user-email: ${{ '924393527@qq.com' }}
-        run: chmod a+x test.bash && ./test.bash ${git-user-name} ${git-user-email}
+        run: chmod a+x test.bash && ./test.bash "$git-user-name" "$git-user-email"
         shell: bash
 
