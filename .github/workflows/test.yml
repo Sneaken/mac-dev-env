@@ -34,8 +34,6 @@ jobs:
       fail-fast: false
       matrix:
         operating-system: [ macos-latest ]
-        git-user-name: ${{ 'Sneaker' }}
-        git-user-email: ${{ '924393527@qq.com' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -43,6 +41,9 @@ jobs:
 #        run: chmod a+x init.bash && ./init.bash
 #        shell: bash
       - name: test
-        run: chmod a+x test.bash && ./test.bash ${{matrix.git-user-name}} ${{matrix.git-user-email}}
+        env:
+          git-user-name: ${{ 'Sneaker' }}
+          git-user-email: ${{ '924393527@qq.com' }}
+        run: chmod a+x test.bash && ./test.bash ${git-user-name} ${git-user-email}
         shell: bash
 
