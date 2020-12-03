@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-system: macos-latest
+        operating-system: [ macos-latest ]
         git-user-name: Sneaker
         git-user-email: 924393527@qq.com
     steps:
