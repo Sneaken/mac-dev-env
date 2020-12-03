@@ -137,4 +137,11 @@ function main() {
   source "$HOME/${SHELL_CONFIG_FILE}"
 }
 
-main
+#main
+
+function test() {
+  echo "git_user_name $1"
+  echo "git_user_email $2"
+}
+
+test "$1" "$2"
