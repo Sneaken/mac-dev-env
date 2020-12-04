@@ -29,11 +29,10 @@ jobs:
 #      - name: Run a one-line script
 #        run: echo Hello, world!
   test:
-    runs-on: ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
       matrix:
-        operating-system: [ macos-latest ]
+        os: [ macos-latest ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2

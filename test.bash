@@ -145,3 +145,7 @@ function test() {
 }
 
 test "$1" "$2"
+
+
+echo "git_user_name: $git_user_name"
+echo "git_user_email: $git_user_email"
