@@ -39,10 +39,18 @@ jobs:
 #      - name: init
 #        run: chmod a+x init.bash && ./init.bash
 #        shell: bash
-      - name: test
+      - name: test-bash
         env:
-          git_user_name: ${{ 'Sneaker' }}
-          git_user_email: ${{ '924393527@qq.com' }}
-        run: chmod a+x test.bash && ./test.bash ${git_user_name} ${git_user_email}
+          GIT_USER_NAME: ${{ 'Sneaker' }}
+          GIT_USER_EMAIL: ${{ '924393527@qq.com' }}
+          $SHELL_CONFIG_FILE: ${{ '.bash_profile' }}
+        run: chmod a+x test.bash && ./test.bash
+        shell: bash
+      - name: test-zsh
+        env:
+          GIT_USER_NAME: ${{ 'Sneaker' }}
+          GIT_USER_EMAIL: ${{ '924393527@qq.com' }}
+          $SHELL_CONFIG_FILE: ${{ '.bash_profile' }}
+        run: chmod a+x test.bash && ./test.bash
         shell: bash
 

@@ -19,7 +19,7 @@ function init_brew() {
   fi
 }
 
-function init_utils_by_brew() {
+function init_utils_by_brew_test() {
   if ! command -v brew &>/dev/null; then
     echo 'init utils fail...'
     return
@@ -29,8 +29,8 @@ function init_utils_by_brew() {
 
   # Install GNU core utilities (those that come with macOS are outdated).
   # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-  brew install coreutils
-  ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
+#  brew install coreutils
+#  ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
 
   # Install some other useful utilities like `sponge`.
   #brew install moreutils
@@ -50,45 +50,36 @@ function init_utils_by_brew() {
   fi
 
   # common tools
-  brew install wget
-  brew install vim
-  brew install grep
-  brew install openssh
-  brew install screen
-  brew install ack
+#  brew install wget
+#  brew install vim
+#  brew install grep
+#  brew install openssh
+#  brew install screen
+#  brew install ack
   brew install git
-  brew install curl
+#  brew install curl
 
-  brew install --cask oracle-jdk
+#  brew install --cask oracle-jdk
   #brew install maven
   #brew install gradle
 
-  brew install --cask docker
-
-  brew install --cask iterm2
-
-  brew install --cask webstorm
-  brew install --cask visual-studio-code
+#  brew install --cask docker
+#
+#  brew install --cask iterm2
+#
+#  brew install --cask webstorm
+#  brew install --cask visual-studio-code
 
   brew install nvm
 }
 
-function init_git() {
+function init_git_test() {
   if ! command -v git &>/dev/null; then
     echo 'git could not be found'
     return
   fi
-  local GIT_USER_NAME
-  local GIT_USER_EMAIL
-
   echo 'init your git config...'
-
-  echo -n 'please enter your username: '
-  read -r GIT_USER_NAME
   git config --global user.name "$GIT_USER_NAME"
-
-  echo -n 'please enter your email: '
-  read -r GIT_USER_EMAIL
   git config --global user.email "$GIT_USER_EMAIL"
 
   # 生成公钥
@@ -97,8 +88,14 @@ function init_git() {
   echo 'git config done...'
 }
 
-function init_nvm() {
+function init_nvm_test() {
   echo 'init nvm'
+
+  if [ ! -e "$HOME/${SHELL_CONFIG_FILE}" ]; then
+    touch "$HOME/${SHELL_CONFIG_FILE}"
+    echo "file not found... create file $HOME/${SHELL_CONFIG_FILE}"
+  fi
+
   if ! [[ $NVM_DIR == "$HOME/.nvm" ]]; then
     echo -n '
 export NVM_DIR="$HOME/.nvm"
@@ -115,37 +112,22 @@ export NVM_DIR="$HOME/.nvm"
   echo 'init nvm done'
 }
 
-function main() {
-  echo 'init your mac...'
+function test() {
+  echo "test init mac ..."
 
   init_work_dirs
-
   if ! command -v curl &>/dev/null; then
     echo 'curl could not be found'
     exit
   fi
-  SHELL_CONFIG_FILE='.zshrc'
-  init_brew
-  init_utils_by_brew
 
-  init_nvm
-#  init_git
+  init_brew
+  init_utils_by_brew_test
+
+  init_git_test
+  init_nvm_test
 
   echo 'done...'
-
-  # shellcheck source=/dev/null
-  source "$HOME/${SHELL_CONFIG_FILE}"
 }
 
-#main
-
-function test() {
-  echo "git_user_name $1"
-  echo "git_user_email $2"
-}
-
-test "$1" "$2"
-
-
-echo "git_user_name: $git_user_name"
-echo "git_user_email: $git_user_email"
+test
