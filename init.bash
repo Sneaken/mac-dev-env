@@ -1,42 +1,17 @@
 #!/usr/bin/env bash
 
+SHELL_CONFIG_FILE='.zshrc'
+
 function init_work_dirs() {
   echo
   echo 'init work directory...'
-  local dirs=("$HOME/Code/Projects/Sneaker" "$HOME/Code/Projects/front-end" "$HOME/Code/Projects/back-end" "$HOME/Code/env")
+  local dirs=("$HOME/Code/Projects/Sneaken" "$HOME/Code/Projects/front-end" "$HOME/Code/Projects/back-end" "$HOME/Code/config" "$HOME/Code/env")
   for dir in "${dirs[@]}"; do
     [ -d "$dir" ] || mkdir -p "$dir"
   done
   echo 'work directory done...'
-}
-
-function choose_default_shell() {
-  local choice
-  echo -n '
-please select the shell you use:
-1) bash
-2) zsh
-'
-  read -r choice
-  case $choice in
-  [bB]*)
-    SHELL_CONFIG_FILE='.bash_profile'
-    ;;
-  [zZ]*)
-    SHELL_CONFIG_FILE='.zshrc'
-    if ! command -v zsh; then
-      echo 'zsh could not bu found'
-      exit
-    fi
-    chsh -s "$(command -v zsh)"
-    ;;
-  *)
-    echo
-    echo "Don't enter other shell! try again..."
-    choose_default_shell
-    return
-    ;;
-  esac
+  echo
+  echo
 }
 
 function init_brew() {
@@ -60,36 +35,10 @@ function init_utils_by_brew() {
   brew install coreutils
   ln -s "${BREW_PREFIX}/bin/gsha256sum" "${BREW_PREFIX}/bin/sha256sum"
 
-  # Install some other useful utilities like `sponge`.
-  #brew install moreutils
-
-  # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-  #brew install findutils
-
-  # Install GNU `sed`
-  #brew install gnu-sed
-
-  if [ $SHELL_CONFIG_FILE == '.zshrc' ]; then
-    # Install a modern version of Zsh.
-    brew install zsh zsh-completions
-  else
-    # Install a modern version of Bash.
-    brew install bash bash-completion2
-  fi
-
-  # common tools
-  brew install wget
-  brew install vim
-  brew install grep
-  brew install openssh
-  brew install screen
-  brew install ack
-  brew install git
-  brew install curl
+  # Install a modern version of Zsh.
+  brew install zsh zsh-completions
 
   brew install --cask oracle-jdk
-  #brew install maven
-  #brew install gradle
 
   brew install --cask docker
 
@@ -97,8 +46,18 @@ function init_utils_by_brew() {
 
   brew install --cask webstorm
   brew install --cask visual-studio-code
+  brew install --cask datagrid
+
+  brew install --cask qq
+  brew install --cask wechart
+
+
+  # 公司用
+  brew install wireguard-tools
 
   brew install nvm
+  brew install mysql
+  brew install nginx
 }
 
 function init_git() {
@@ -106,19 +65,37 @@ function init_git() {
     echo 'git could not be found'
     return
   fi
+
+  local choice
+  echo -n '
+Do you need to initialize git ？
+
+Please Enter to continue Or no to abort...
+'
+  read -r choice
+  case $choice in
+  [nN]*)
+    return
+    ;;
+  *)
+    ;;
+  esac
   local GIT_USER_NAME
   local GIT_USER_EMAIL
 
   echo 'init your git config...'
-
+  echo
+  echo
   echo -n 'please enter your username: '
   read -r GIT_USER_NAME
   git config --global user.name "$GIT_USER_NAME"
-
+  echo
+  echo
   echo -n 'please enter your email: '
   read -r GIT_USER_EMAIL
   git config --global user.email "$GIT_USER_EMAIL"
-
+  echo
+  echo
   # 生成公钥
   ssh-keygen -o
 
@@ -141,6 +118,15 @@ export NVM_DIR="$HOME/.nvm"
   fi
 
   echo 'init nvm done'
+
+  if ! command -v node &>/dev/null; then
+    echo 'node could not be found'
+    return
+  fi
+  echo
+  echo
+  echo 'install yarn...'
+  brew install yarn
 }
 
 function main() {
@@ -153,7 +139,6 @@ function main() {
     exit
   fi
 
-  choose_default_shell
   init_brew
   init_utils_by_brew
 
@@ -166,4 +151,4 @@ function main() {
   source "$HOME/${SHELL_CONFIG_FILE}"
 }
 
-main
+#main
