@@ -105,11 +105,11 @@ Please Enter to continue Or no to abort...
 function init_nvm() {
   echo 'init nvm'
   if ! [[ $NVM_DIR == "$HOME/.nvm" ]]; then
-    echo -n '
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix)/opt/nvm/nvm.sh" ] && . "$(brew --prefix)/opt/nvm/nvm.sh" # This loads nvm
-[ -s "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" ] && . "$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-  ' >>"$HOME/${SHELL_CONFIG_FILE}"
+    echo -n "
+export NVM_DIR=\"$HOME/.nvm\"
+[ -s \"$(brew --prefix)/opt/nvm/nvm.sh\" ] && . \"$(brew --prefix)/opt/nvm/nvm.sh\" # This loads nvm
+[ -s \"$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm\" ] && . \"$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm\" # This loads nvm bash_completion
+  " >>"$HOME/${SHELL_CONFIG_FILE}"
 
     # shellcheck source=/dev/nul
     source "$HOME/${SHELL_CONFIG_FILE}"
