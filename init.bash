@@ -145,6 +145,13 @@ function main() {
   init_nvm
   init_git
 
+
+  # install oh my zsh
+  echo 'install oh my zsh'
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  echo 'oh my zsh install done...'
+  echo
+  echo
   echo 'done...'
 
   # shellcheck source=/dev/null
