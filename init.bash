@@ -54,6 +54,7 @@ function init_utils_by_brew() {
 
   # 公司用
   brew install wireguard-tools
+  brew install redis
 
   brew install nvm
   brew install mysql
