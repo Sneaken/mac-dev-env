@@ -39,6 +39,7 @@ function init_utils_by_brew() {
   brew install zsh zsh-completions
 
   brew install --cask oracle-jdk
+  brew install --cask flutter
 
   brew install --cask docker
 
