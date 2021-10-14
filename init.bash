@@ -129,6 +129,8 @@ export NVM_DIR=\"$HOME/.nvm\"
   echo
   echo 'install yarn...'
   brew install yarn
+  echo 'install pnpm...'
+  brew install pnpm
 }
 
 function main() {
