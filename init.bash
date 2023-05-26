@@ -130,9 +130,9 @@ export PATH=\"$VOLTA_HOME/bin:$PATH\"
   echo
   echo
   echo 'install yarn...'
-  brew install yarn
+  volta install yarn
   echo 'install pnpm...'
-  brew install pnpm
+  volta install pnpm
 }
 
 function main() {
