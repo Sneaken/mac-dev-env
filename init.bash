@@ -57,7 +57,7 @@ function init_utils_by_brew() {
   brew install wireguard-tools
   brew install redis
 
-  brew install nvm
+  brew install volta
   brew install mysql
   brew install nginx
 }
@@ -104,22 +104,24 @@ Please Enter to continue Or no to abort...
   echo 'git config done...'
 }
 
-function init_nvm() {
-  echo 'init nvm'
-  if ! [[ $NVM_DIR == "$HOME/.nvm" ]]; then
+function init_volta() {
+  echo 'init volta'
+  if ! [[ $VOLTA_HOME == "$HOME/.volta" ]]; then
     echo -n "
-export NVM_DIR=\"$HOME/.nvm\"
-[ -s \"$(brew --prefix)/opt/nvm/nvm.sh\" ] && . \"$(brew --prefix)/opt/nvm/nvm.sh\" # This loads nvm
-[ -s \"$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm\" ] && . \"$(brew --prefix)/opt/nvm/etc/bash_completion.d/nvm\" # This loads nvm bash_completion
+export VOLTA_HOME=\"$HOME/.volta\"
+export PATH=\"$VOLTA_HOME/bin:$PATH\"
   " >>"$HOME/${SHELL_CONFIG_FILE}"
 
     # shellcheck source=/dev/nul
     source "$HOME/${SHELL_CONFIG_FILE}"
 
-    nvm install node
+    volta install node
+    volta install node@12
+    volta install node@14
+    volta install node@16
   fi
 
-  echo 'init nvm done'
+  echo 'init volta done'
 
   if ! command -v node &>/dev/null; then
     echo 'node could not be found'
@@ -146,7 +148,7 @@ function main() {
   init_brew
   init_utils_by_brew
 
-  init_nvm
+  init_volta
   init_git
 
 
