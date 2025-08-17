@@ -174,6 +174,7 @@ function main() {
 
 
   # install oh my zsh
+  # oh my zsh 一定要放到最后安装 不然貌似会出现奇怪的事情
   echo 'install oh my zsh'
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   echo 'oh my zsh install done...'
