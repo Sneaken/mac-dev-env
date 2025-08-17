@@ -18,7 +18,7 @@ function init_brew() {
   if ! command -v brew &>/dev/null; then
     echo "brew could not be found"
     echo "install brew, we will ask for user password"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
 }
 
@@ -38,28 +38,46 @@ function init_utils_by_brew() {
   # Install a modern version of Zsh.
   brew install zsh zsh-completions
 
-  brew install --cask oracle-jdk
-  brew install --cask flutter
-
-  brew install --cask docker
-
-  brew install --cask iterm2
-
-  brew install --cask webstorm
-  brew install --cask visual-studio-code
-  brew install --cask datagrid
-
-  brew install --cask qq
-  brew install --cask wechart
-
-
-  # 公司用
-  brew install wireguard-tools
-  brew install redis
-
   brew install volta
+  init_volta
+  #  brew install wireguard-tools
+  brew install redis
   brew install mysql
   brew install nginx
+
+#  brew install --cask flutter
+  brew install --cask docker
+
+#  brew install --cask iterm2
+  brew install --cask warp
+
+  # 开发相关
+  brew install --cask webstorm
+  brew install --cask intellij-idea
+  brew install --cask visual-studio-code
+  brew install --cask datagrid
+  brew install ollama
+#  brew install --cask transmit
+
+# 调试相关
+brew install wireshark
+brew install --cask proxyman
+brew install --cask apifox
+# 需要 node 环境
+# brew install whistle
+
+# 输入法
+# brew install --cask wetype
+
+# 社交软件
+#  brew install --cask qq
+#  brew install --cask wechart
+
+# 文档类
+brew install --cask obsidian
+brew install --cask excalidrawz
+#brew install --cask tencent-docs
+#brew install --cask wpsoffice-cn
 }
 
 function init_git() {
@@ -135,6 +153,10 @@ export PATH=\"$VOLTA_HOME/bin:$PATH\"
   volta install pnpm
 }
 
+#function init_java() {
+#  curl -s "https://get.sdkman.io" | bash
+#}
+
 function main() {
   echo 'init your mac...'
 
@@ -148,7 +170,6 @@ function main() {
   init_brew
   init_utils_by_brew
 
-  init_volta
   init_git
 
 
@@ -164,4 +185,4 @@ function main() {
   source "$HOME/${SHELL_CONFIG_FILE}"
 }
 
-#main
+main
