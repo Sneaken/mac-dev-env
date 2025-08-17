@@ -60,7 +60,6 @@ function init_utils_by_brew() {
 #  brew install --cask transmit
 
 # 调试相关
-brew install wireshark
 brew install wireshark-app
 brew install --cask proxyman
 brew install --cask apifox
