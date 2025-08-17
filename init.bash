@@ -46,7 +46,7 @@ function init_utils_by_brew() {
   brew install nginx
 
 #  brew install --cask flutter
-  brew install --cask docker
+#  brew install --cask docker
 
 #  brew install --cask iterm2
   brew install --cask warp
@@ -55,12 +55,13 @@ function init_utils_by_brew() {
   brew install --cask webstorm
   brew install --cask intellij-idea
   brew install --cask visual-studio-code
-  brew install --cask datagrid
+  brew install --cask datagrip
   brew install ollama
 #  brew install --cask transmit
 
 # 调试相关
 brew install wireshark
+brew install wireshark-app
 brew install --cask proxyman
 brew install --cask apifox
 # 需要 node 环境
@@ -78,6 +79,9 @@ brew install --cask obsidian
 brew install --cask excalidrawz
 #brew install --cask tencent-docs
 #brew install --cask wpsoffice-cn
+
+# 视频
+brew install --cask iina
 }
 
 function init_git() {
@@ -125,10 +129,10 @@ Please Enter to continue Or no to abort...
 function init_volta() {
   echo 'init volta'
   if ! [[ $VOLTA_HOME == "$HOME/.volta" ]]; then
-    echo -n "
+    echo '
 export VOLTA_HOME=\"$HOME/.volta\"
 export PATH=\"$VOLTA_HOME/bin:$PATH\"
-  " >>"$HOME/${SHELL_CONFIG_FILE}"
+  ' >>"$HOME/${SHELL_CONFIG_FILE}"
 
     # shellcheck source=/dev/nul
     source "$HOME/${SHELL_CONFIG_FILE}"
